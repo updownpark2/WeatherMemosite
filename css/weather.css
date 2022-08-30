@@ -1,0 +1,11 @@
+.weatherbox {
+  justify-content: center;
+  margin-top: 0px;
+  text-align: center;
+  padding: 20px;
+}
+.weathercover {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}

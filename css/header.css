@@ -1,0 +1,17 @@
+.Headerbox {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 30px;
+  font-weight: 200;
+}
+#changename {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+#changename button {
+  border: 0;
+  background-color: white;
+  border-radius: 8px;
+}

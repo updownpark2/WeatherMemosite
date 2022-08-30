@@ -1,0 +1,12 @@
+.clockbox {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: 300;
+}
+.clockbox span {
+  background-color: white;
+  padding: 18px 18px;
+  border-radius: 20px;
+}

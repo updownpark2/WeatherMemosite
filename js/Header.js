@@ -1,14 +1,14 @@
 export default function Header({ $target, data }) {
   const Headerbox = document.createElement("div");
-
+  Headerbox.classList.add("Headerbox");
   this.data = data;
 
   this.render = function () {
     $target.appendChild(Headerbox);
     Headerbox.innerHTML = `${
       this.data === null
-        ? `<span>input your name please ^^</span>`
-        : `<span>Have a good day ${this.data} <span/><button>이름변경!</button>`
+        ? `<span class="animated fadeIn">사용자의 이름은 무엇인가요?</span>`
+        : `<span class="animated fadeIn">Have a good day ${this.data} 님!<span/><div id="changename"><button>이름변경!</button></div>`
     }`;
   };
   this.render();

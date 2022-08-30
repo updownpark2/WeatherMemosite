@@ -1,0 +1,42 @@
+.Inputbox {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#todoform input {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 10px 40px;
+  border: none;
+  border-bottom: 1px black solid;
+  font-size: 17px;
+}
+#todoform input::placeholder {
+  font-size: 17px;
+  color: black;
+  opacity: 0.5;
+  text-align: end;
+  margin-right: 0;
+}
+.todopaintbox {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.todolist {
+  margin-bottom: 25px;
+  font-family: monospace;
+  font-size: 15px;
+  border-bottom: 1px black solid;
+  padding: 0 35px 0 0;
+  text-align: start;
+}
+.todolist button {
+  border: 0;
+  background: none;
+  text-align: end;
+  position: relative;
+  left: 40px;
+  font-size: 15px;
+}
