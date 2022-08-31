@@ -12,7 +12,7 @@ export default function Weather({ GoWeather }) {
         const userweather = data.weather[0].main;
         const weathericon = data.weather[0].icon;
         const weathertemp = data.main.temp;
-        console.log(data.main.temp); //저장은했음
+        //저장은했음
         GoWeather({ userlocation, userweather, weathericon, weathertemp });
       });
   }

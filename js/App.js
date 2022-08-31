@@ -74,6 +74,10 @@ export default function App({ $target }) {
       $target.appendChild(paintcover);
       const paintbox = document.querySelector(".weatherbox");
       paintbox.innerHTML = `<div class="paintcover"><div><span>${userlocation}</span></div><div class="animated jello infinite"><img class="weathericon" src="http://openweathermap.org/img/wn/${weathericon}@4x.png"/></div><div><span>온도: ${weathertemp}℃</span></div></div>`;
+      //loading창만들기
+      $target.classList.remove("test");
+      const mask = document.querySelector(".mask");
+      mask.classList.add("test");
 
       const mention = new Mention({
         onMention: (arr2) => {
