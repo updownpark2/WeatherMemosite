@@ -6,6 +6,8 @@ import Background from "./Background.js";
 import Mention from "./mention.js";
 import Todoinput from "./Todoinput.js";
 import Todopaint from "./Todopaint.js";
+import Forecast from "./forecast.js";
+import Forecastpaint from "./Forcastpaint.js";
 export default function App({ $target }) {
   localStorage.getItem("todolist") !== null
     ? (this.todo = JSON.parse(localStorage.getItem("todolist")))
@@ -17,17 +19,24 @@ export default function App({ $target }) {
   };
   this.data = localStorage.getItem("name");
 
+  this.cast = [];
+
+  this.newcast = function (castnew) {
+    this.cast = castnew;
+  };
+  //forecast data
+
   const clock = new Clock({
     $target,
     Timego: (Timebox) => {
       function timegoon() {
         const date = new Date();
-        Timebox.innerHTML = `<span class="animated bounceIn";>${String(
-          date.getHours()
-        ).padStart("2", 0)}:${String(date.getMinutes()).padStart(
+        Timebox.innerHTML = `<span>${String(date.getHours()).padStart(
           "2",
           0
-        )}:${String(date.getSeconds()).padStart("2", 0)}</span>`;
+        )}:${String(date.getMinutes()).padStart("2", 0)}:${String(
+          date.getSeconds()
+        ).padStart("2", 0)}</span>`;
       }
       timegoon();
       setInterval(() => {
@@ -49,7 +58,7 @@ export default function App({ $target }) {
 
   const header = new Header({ $target, data: this.data });
 
-  const todoinput = new Todoinput({
+  /*const todoinput = new Todoinput({
     $target,
     todoSubmit: (inputvalue) => {
       this.setState([...this.todo, inputvalue]);
@@ -64,7 +73,7 @@ export default function App({ $target }) {
       );
       this.setState(filtertodo);
     },
-  });
+  });*/
 
   const weather = new Weather({
     GoWeather: ({ userlocation, userweather, weathericon, weathertemp }) => {
@@ -91,6 +100,14 @@ export default function App({ $target }) {
       });
     },
   });
+  const forecast = new Forecast({
+    Forweather: (res) => {
+      //res = > 5개의 배열원소로이루어짐
+      this.newcast(res); //this.cast는 res가됐다.
+      const forecastpaint = new Forecastpaint({ $target, cast: this.cast });
+    },
+  });
+
   const background = new Background({
     goBack: (arr) => {
       const body = document.querySelector("body");
@@ -100,4 +117,6 @@ export default function App({ $target }) {
       body.appendChild(image);
     },
   });
+
+  //newopen.close();이렇게하면됨
 }

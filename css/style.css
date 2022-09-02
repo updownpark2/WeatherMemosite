@@ -27,3 +27,19 @@ body {
 .hidden {
   display: none;
 }
+.Forecastbox {
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+}
+.forecasttime {
+  font-size: 3px;
+}
+.tempandday {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.unixspan {
+  margin-left: 23px;
+}
