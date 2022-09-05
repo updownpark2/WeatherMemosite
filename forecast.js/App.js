@@ -11,12 +11,15 @@ export default function App({ $target }) {
 
   const forecastinfo = new Forecastinfo({
     Foreweather: (res) => {
+      res.map((item) => {
+        console.log(item.rain);
+      });
       this.setState(res);
       //여기서 데이터를 가지고 그리면 된다!
     },
   });
 
-  const background = new Background({
+  /*const background = new Background({
     goBack: (arr) => {
       const body = document.querySelector("body");
       const image = document.createElement("img");
@@ -24,5 +27,5 @@ export default function App({ $target }) {
       image.src = `./img/${arr[Math.floor(Math.random() * 4)]}`;
       body.appendChild(image);
     },
-  });
+  });*/
 }

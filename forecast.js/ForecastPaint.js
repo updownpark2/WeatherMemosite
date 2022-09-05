@@ -13,6 +13,14 @@ export default function ForecastPaint({ $target, data }) {
     }
     forecastpaintbox.innerHTML = `<ul class="animated fadeInUp slowly">${this.data
       .map(function (item, index) {
+        if (index === 3) {
+          return `<li><div><img class="animated jello infinite" src="http://openweathermap.org/img/wn/${
+            item.weather[0].icon
+          }@2x.png"/></div><div>${item.main.temp}℃</div>${unixchange(
+            item.dt
+          )}</li>
+          <span><s>여기부터오후!!</s></span>`;
+        }
         return `<li><div><img class="animated jello infinite" src="http://openweathermap.org/img/wn/${
           item.weather[0].icon
         }@2x.png"/></div><div>${item.main.temp}℃</div>${unixchange(item.dt)}</li>`;

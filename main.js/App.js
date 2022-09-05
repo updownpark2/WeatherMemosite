@@ -76,13 +76,37 @@ export default function App({ $target }) {
   });*/
 
   const weather = new Weather({
-    GoWeather: ({ userlocation, userweather, weathericon, weathertemp }) => {
+    GoWeather: ({
+      userlocation,
+      userweather,
+      weathericon,
+      weathertemp,
+      filterforecastdata,
+    }) => {
+      let paintarray = [];
+      filterforecastdata.map(function (item) {
+        if (item.rain !== null || item.rain !== undefined) {
+          paintarray.push(
+            Math.floor(JSON.stringify(item.rain).slice(6, 10) * 1)
+          );
+        }
+      }); //강수량변화
       const paintcover = document.createElement("div");
       paintcover.classList.add("weathercover");
       paintcover.innerHTML = `<div class="weatherbox"></div>`;
       $target.appendChild(paintcover);
       const paintbox = document.querySelector(".weatherbox");
-      paintbox.innerHTML = `<div class="paintcover"><div><span>${userlocation}</span></div><div class="animated jello infinite"><img class="weathericon" src="http://openweathermap.org/img/wn/${weathericon}@4x.png"/></div><div><span>온도: ${weathertemp}℃</span></div></div>`;
+      paintbox.innerHTML = `<div class="paintcover"><div><span>${userlocation}</span></div><div class="animated jello infinite"><img class="weathericon" src="http://openweathermap.org/img/wn/${weathericon}@4x.png"/></div><div><ul>${
+        paintarray !== []
+          ? `<span>🌂우산 챙기세요!</span> ${paintarray
+              .map(function (item, index) {
+                return `<li>${
+                  (index + 1) * 3
+                }시간 후 비가 시간 당 ${Math.floor(item / 3)}mm 내립니다💧</li>`;
+              })
+              .join("")}`
+          : `<span>오늘은 비가 오지 않을 예정입니다!😁</span>`
+      }</ul></div><div><span>온도: ${weathertemp}℃</span></div></div>`;
       //loading창만들기
       $target.classList.remove("test");
       const mask = document.querySelector(".mask");

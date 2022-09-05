@@ -4,6 +4,15 @@ export default function Weather({ GoWeather }) {
     let lon = position.coords.longitude;
     const APIKEY = "0df8b3dcb31ae79a932729e9ef135343";
     fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`
+    )
+      .then((res) => res.json())
+      .then(function (data) {
+        const datalist = JSON.stringify(data.list);
+        localStorage.setItem("forecastdata", datalist);
+      }); //Index4까지
+
+    fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`
     )
       .then((res) => res.json())
@@ -12,8 +21,18 @@ export default function Weather({ GoWeather }) {
         const userweather = data.weather[0].main;
         const weathericon = data.weather[0].icon;
         const weathertemp = data.main.temp;
+        const forecastdata = JSON.parse(localStorage.getItem("forecastdata"));
+        const filterforecastdata = forecastdata.filter(function (item, index) {
+          return index > 0 && index <= 3;
+        });
         //저장은했음
-        GoWeather({ userlocation, userweather, weathericon, weathertemp });
+        GoWeather({
+          userlocation,
+          userweather,
+          weathericon,
+          weathertemp,
+          filterforecastdata,
+        });
       });
   }
   function fail() {
