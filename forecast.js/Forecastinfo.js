@@ -1,10 +1,8 @@
 export default function Forecastinfo({ Foreweather }) {
-  console.log("Asdasd");
   function Success(position) {
     //여기서 img의 index를받아야한다.
     const imgstorage = localStorage.getItem("IMG");
     const forecastdata = JSON.parse(localStorage.getItem("forecastdata"));
-    console.log(forecastdata);
     if (imgstorage === "0") {
       let filterres = forecastdata.filter(function (item, index) {
         return index < 3;

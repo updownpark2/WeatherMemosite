@@ -85,33 +85,44 @@ export default function App({ $target }) {
     }) => {
       let paintarray = [];
       filterforecastdata.map(function (item) {
-        if (item.rain !== null || item.rain !== undefined) {
-          paintarray.push(
-            Math.floor(JSON.stringify(item.rain).slice(6, 10) * 1)
-          );
+        if (item.rain !== undefined) {
+          paintarray.push(JSON.stringify(item.rain));
+          console.log(item.rain);
+        } else if (item.rain === undefined) {
+          return;
         }
       }); //강수량변화
+
+      console.log(paintarray);
+
       const paintcover = document.createElement("div");
       paintcover.classList.add("weathercover");
       paintcover.innerHTML = `<div class="weatherbox"></div>`;
       $target.appendChild(paintcover);
       const paintbox = document.querySelector(".weatherbox");
       paintbox.innerHTML = `<div class="paintcover"><div><span>${userlocation}</span></div><div class="animated jello infinite"><img class="weathericon" src="http://openweathermap.org/img/wn/${weathericon}@4x.png"/></div><div><ul>${
-        paintarray !== []
-          ? `<span>🌂우산 챙기세요!</span> ${paintarray
+        paintarray.length === 0
+          ? `<span>오늘은 비가 오지 않을 예정입니다!🌞</span>`
+          : `<span>우산 챙기세요!🌂</span> ${paintarray
               .map(function (item, index) {
-                return `<li>${
+                return `<li class="hidden">${
                   (index + 1) * 3
                 }시간 후 비가 시간 당 ${Math.floor(item / 3)}mm 내립니다💧</li>`;
               })
-              .join("")}`
-          : `<span>오늘은 비가 오지 않을 예정입니다!😁</span>`
+              .join("")}<button id="InfoButton">상세정보</button>`
       }</ul></div><div><span>온도: ${weathertemp}℃</span></div></div>`;
       //loading창만들기
       $target.classList.remove("test");
       const mask = document.querySelector(".mask");
       mask.classList.add("test");
-
+      if (paintarray.length !== 0) {
+        const InfoButton = document.querySelector(".InfoButton");
+        InfoButton.add("click", function (e) {
+          console.log(e.target); //여기서 이제 li찾아서 li.Classlist.remove("hidden")
+          //한 후 애니메이션 추가! 후 InfoButton은 addClasslist.add("hidden") 버튼 li.innerHTML=<button>닫기</button>
+          //닫기버튼에 addeventlistener() 적용해서 열고 닫기 할 수 있게 설정
+        });
+      }
       const mention = new Mention({
         onMention: (arr2) => {
           const mentionbox = document.createElement("div");
